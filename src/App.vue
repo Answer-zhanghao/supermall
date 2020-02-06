@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import tabbarview from "components/tabbar/tabbarview";
-  import MainTabBar from 'components/content/tabbar/MainTabBar'
+import tabbarview from "./components/common/tabbar/tabbarview";
+  import MainTabBar from './components/content/mainTabbar/MainTabBar'
 export default {
   name: "App",
   components: {
