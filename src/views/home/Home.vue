@@ -1,15 +1,19 @@
 <template>
-    <div>
-        <h1>首页</h1>
-    </div>
+  <div class="home">
+    <navbar>
+      <div slot="center">购物街</div>
+    </navbar>
+  </div>
 </template>
 
 <script>
+import navbar from "components/common/navbar/NavBar";
 export default {
-    name:'Home'
-}
+  name: "Home",
+  components: {
+    navbar
+  }
+};
 </script>
 
-<style>
-
-</style>
+<style></style>
