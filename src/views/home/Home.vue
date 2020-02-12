@@ -5,6 +5,8 @@
     </navbar>
     <home-swiper :banners='banners'></home-swiper>
     <home-rounding :recommends='recommends'></home-rounding>
+    <feture-view></feture-view>
+    <tab-control :tabitem="['流行','新款','精选']"></tab-control>
   </div>
 </template>
 
@@ -12,6 +14,8 @@
 import navbar from "components/common/navbar/NavBar";
 import HomeSwiper from "views/home/childrenComponents/HomeSwiper";
 import HomeRounding from 'views/home/childrenComponents/HomeRoundImg'
+import FetureView from 'views/home/childrenComponents/FetureView'
+import TabControl from 'components/content/tabControl/TabControl'
 import { getHomeMultidata } from "../../network/home";
 
 export default {
@@ -19,7 +23,9 @@ export default {
   components: {
     navbar,
     HomeSwiper,
-    HomeRounding
+    HomeRounding,
+    FetureView,
+    TabControl
   },
   data() {
     return {
@@ -37,4 +43,12 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+  .nav-bar{
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    
+  }
+</style>
