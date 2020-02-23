@@ -20,6 +20,7 @@ export default {
   background-color: #ff5766;
   box-shadow: 0px 1px 1px rgba(100, 100, 100, 0.1);
   text-align: center;
+  z-index: 100;
 }
 
 .left,

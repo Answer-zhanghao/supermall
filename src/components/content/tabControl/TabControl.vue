@@ -1,7 +1,13 @@
 <template>
-  <div id="tabcon">
-      <div class='tabcon-item' v-for="(item,index) in tabitem" :class="{active1:index===isActivite}" >
-    <span>{{ item }}</span></div>
+  <div id="tabcon" class="tab-control">
+    <div
+      class="tabcon-item"
+      v-for="(item,index) in tabitem"
+      :class="{active1:index===isActivite}"
+      @click="itemClick(index)"
+    >
+      <span>{{ item }}</span>
+    </div>
   </div>
 </template>
 
@@ -18,6 +24,11 @@ export default {
   },
   data() {
     return { isActivite: 0 };
+  },
+  methods: {
+    itemClick(index) {
+      this.isActivite = index;
+    }
   }
 };
 </script>
@@ -28,6 +39,8 @@ export default {
   text-align: center;
   font-size: 15px;
   margin-top: 20px;
+  background-color: white;
+  z-index: 100
 }
 .tabcon-item {
   flex: 1;
@@ -36,11 +49,13 @@ export default {
   display: block;
   border-bottom: 1px solid pink;
 }
+.tabcon-item span {
+  padding: 5px;
+}
 .active1 {
   color: var(--color-high-text);
- 
 }
-.active1 span{
- border-bottom: 3px solid var(--color-tint);
+.active1 span {
+  border-bottom: 3px solid var(--color-tint);
 }
 </style>

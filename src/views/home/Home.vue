@@ -7,6 +7,7 @@
     <home-rounding :recommends='recommends'></home-rounding>
     <feture-view></feture-view>
     <tab-control :tabitem="['流行','新款','精选']"></tab-control>
+    <goods-list :goods='goods["pop"].list'></goods-list>
   </div>
 </template>
 
@@ -16,7 +17,8 @@ import HomeSwiper from "views/home/childrenComponents/HomeSwiper";
 import HomeRounding from 'views/home/childrenComponents/HomeRoundImg'
 import FetureView from 'views/home/childrenComponents/FetureView'
 import TabControl from 'components/content/tabControl/TabControl'
-import { getHomeMultidata } from "../../network/home";
+import GoodsList from 'components/content/goods/GoodsList'
+import { getHomeMultidata,getHomeData } from "../../network/home";
 
 export default {
   name: "Home",
@@ -25,20 +27,48 @@ export default {
     HomeSwiper,
     HomeRounding,
     FetureView,
-    TabControl
+    TabControl,
+    GoodsList
   },
   data() {
     return {
       banners: [],
-      recommends: []
+      recommends: [],
+      goods:{
+        'pop':{page:0,list:[]},
+        'news':{page:0,list:[]},
+        'sell':{page:0,list:[]}
+      }
     };
   },
   created() {
+    // 请求多个数据
+     this.getHomeMultidata()
+    //  请求商品数据
+     this.getHomeData('pop')
+     this.getHomeData('news')
+     this.getHomeData('sell')
+
+  },
+  methods:{
+    getHomeMultidata(){
+
+    
     getHomeMultidata().then(res => {
-      console.log(res);
+      
       this.banners = res.data.banner.list;
       this.recommends = res.data.recommend.list;
-    });
+    })},
+    getHomeData(type){
+      
+      
+      const page = this.goods[type].page+1
+      getHomeData(type, page).then(res=>{
+      
+        this.goods[type].list.push(...res.data.list)  
+        this.goods[type].page+=1
+      })
+    }
   }
 };
 </script>
@@ -50,5 +80,10 @@ export default {
     top: 0;
     right: 0;
     
+  }
+  .tab-control{
+    
+ position:sticky;
+ top:44px;
   }
 </style>
