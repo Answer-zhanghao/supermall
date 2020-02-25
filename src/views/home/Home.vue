@@ -7,7 +7,7 @@
     <home-rounding :recommends="recommends"></home-rounding>
     <feture-view></feture-view>
     <tab-control :tabitem="['流行','新款','精选']" @TabClick='TabClick' ></tab-control>
-    <goods-list :goods="goods[IndexClass].list"></goods-list>
+    <goods-list :goods="goodslist"></goods-list>
   </div>
 </template>
 
@@ -44,7 +44,7 @@ export default {
   },
   computed: {
     goodslist(){
-      return goods[this.IndexClass].list
+      return this.goods[this.IndexClass].list
     }
   },
   created() {
