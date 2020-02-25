@@ -28,6 +28,8 @@ export default {
   methods: {
     itemClick(index) {
       this.isActivite = index;
+      this.$emit('TabClick',index)
+
     }
   }
 };
