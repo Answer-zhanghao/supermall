@@ -6,7 +6,7 @@
     <home-swiper :banners="banners"></home-swiper>
     <home-rounding :recommends="recommends"></home-rounding>
     <feture-view></feture-view>
-    <tab-control :tabitem="['流行','新款','精选']" @TabClick='TabClick' ></tab-control>
+    <tab-control :tabitem="['流行','新款','精选']" @TabClick="TabClick"></tab-control>
     <goods-list :goods="goodslist"></goods-list>
   </div>
 </template>
@@ -19,6 +19,8 @@ import FetureView from "views/home/childrenComponents/FetureView";
 import TabControl from "components/content/tabControl/TabControl";
 import GoodsList from "components/content/goods/GoodsList";
 import { getHomeMultidata, getHomeData } from "../../network/home";
+
+import BScroll from "better-scroll";
 
 export default {
   name: "Home",
@@ -39,12 +41,13 @@ export default {
         news: { page: 0, list: [] },
         sell: { page: 0, list: [] }
       },
+      scroll: null,
       IndexClass: "pop"
     };
   },
   computed: {
-    goodslist(){
-      return this.goods[this.IndexClass].list
+    goodslist() {
+      return this.goods[this.IndexClass].list;
     }
   },
   created() {
@@ -54,6 +57,9 @@ export default {
     this.getHomeData("pop");
     this.getHomeData("news");
     this.getHomeData("sell");
+  },
+  mounted(){
+    
   },
   methods: {
     TabClick(index) {
@@ -81,7 +87,7 @@ export default {
     getHomeData(type) {
       const page = this.goods[type].page + 1;
       getHomeData(type, page).then(res => {
-        console.log(res)
+        console.log(res);
         this.goods[type].list.push(...res.data.list);
         this.goods[type].page += 1;
       });
