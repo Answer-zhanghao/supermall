@@ -44,14 +44,19 @@ export default {
   font-size: 15px;
   margin-top: 20px;
   background-color: white;
-  z-index: 100
+  z-index: 100;
+  
+}
+.tab-control {
+  position: sticky;
+  top: 44px;
 }
 .tabcon-item {
   flex: 1;
   padding: 10px;
 
   display: block;
-  border-bottom: 1px solid pink;
+  /* border-bottom: 1px solid pink; */
 }
 .tabcon-item span {
   padding: 5px;

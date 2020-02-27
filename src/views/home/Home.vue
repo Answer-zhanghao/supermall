@@ -1,15 +1,17 @@
 <template>
   <div class="home">
-    <Scroll class="homeContent">
-      <navbar>
+    <navbar>
         <div slot="center">购物街</div>
       </navbar>
+    <Scroll class="homeContent" ref='scroll'>
+      
       <home-swiper :banners="banners"></home-swiper>
       <home-rounding :recommends="recommends"></home-rounding>
-      <feture-view></feture-view>
+      <feture-view/>
       <tab-control :tabitem="['流行','新款','精选']" @TabClick="TabClick"></tab-control>
       <goods-list :goods="goodslist"></goods-list>
     </Scroll>
+    <back-top @click.native='clickFast' />
   </div>
 </template>
 
@@ -21,6 +23,7 @@ import FetureView from "views/home/childrenComponents/FetureView";
 import TabControl from "components/content/tabControl/TabControl";
 import GoodsList from "components/content/goods/GoodsList";
 import Scroll from "components/common/scroll/Scroll";
+import BackTop from "components/content/backtop/BackTop";
 import { getHomeMultidata, getHomeData } from "../../network/home";
 
 export default {
@@ -32,7 +35,8 @@ export default {
     FetureView,
     TabControl,
     GoodsList,
-    Scroll
+    Scroll,
+    BackTop
   },
   data() {
     return {
@@ -76,6 +80,9 @@ export default {
       }
    
     },
+    clickFast(){
+      this.$refs.scroll.scrollTo(0,0)
+    },
     /**
       网络请求相关代码
      */
@@ -104,12 +111,15 @@ export default {
   top: 0;
   right: 0;
 }
-.tab-control {
-  position: sticky;
-  top: 44px;
-}
+
 .homeContent {
   height: 850px;
   overflow: hidden;
+}
+#backtop{
+  position: fixed;
+  right: 8px;
+  bottom: 55px;
+  z-index: 1002;
 }
 </style>
