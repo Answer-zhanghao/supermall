@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <navbar>
+    <Scroll class='content'>
+      <navbar>
       <div slot="center">购物街</div>
     </navbar>
     <home-swiper :banners="banners"></home-swiper>
@@ -8,6 +9,7 @@
     <feture-view></feture-view>
     <tab-control :tabitem="['流行','新款','精选']" @TabClick="TabClick"></tab-control>
     <goods-list :goods="goodslist"></goods-list>
+    </Scroll>
   </div>
 </template>
 
@@ -18,9 +20,10 @@ import HomeRounding from "views/home/childrenComponents/HomeRoundImg";
 import FetureView from "views/home/childrenComponents/FetureView";
 import TabControl from "components/content/tabControl/TabControl";
 import GoodsList from "components/content/goods/GoodsList";
+import Scroll from "components/common/scroll/Scroll";
 import { getHomeMultidata, getHomeData } from "../../network/home";
 
-import BScroll from "better-scroll";
+
 
 export default {
   name: "Home",
@@ -30,7 +33,8 @@ export default {
     HomeRounding,
     FetureView,
     TabControl,
-    GoodsList
+    GoodsList,
+    Scroll
   },
   data() {
     return {
@@ -96,7 +100,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .nav-bar {
   position: fixed;
   left: 0;
@@ -106,5 +110,9 @@ export default {
 .tab-control {
   position: sticky;
   top: 44px;
+}
+.content{
+  height: 850px;
+  overflow: hidden;
 }
 </style>
