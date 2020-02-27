@@ -17,7 +17,8 @@ export default {
     },
     mounted(){
         this.scroll=new BScroll(this.$refs.aaa,{
-            
+            //在better-scroll中，click属性是不起作用的
+            click: true
         })
     }
 }

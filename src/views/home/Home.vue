@@ -1,14 +1,14 @@
 <template>
   <div class="home">
-    <Scroll class='content'>
+    <Scroll class="homeContent">
       <navbar>
-      <div slot="center">购物街</div>
-    </navbar>
-    <home-swiper :banners="banners"></home-swiper>
-    <home-rounding :recommends="recommends"></home-rounding>
-    <feture-view></feture-view>
-    <tab-control :tabitem="['流行','新款','精选']" @TabClick="TabClick"></tab-control>
-    <goods-list :goods="goodslist"></goods-list>
+        <div slot="center">购物街</div>
+      </navbar>
+      <home-swiper :banners="banners"></home-swiper>
+      <home-rounding :recommends="recommends"></home-rounding>
+      <feture-view></feture-view>
+      <tab-control :tabitem="['流行','新款','精选']" @TabClick="TabClick"></tab-control>
+      <goods-list :goods="goodslist"></goods-list>
     </Scroll>
   </div>
 </template>
@@ -22,8 +22,6 @@ import TabControl from "components/content/tabControl/TabControl";
 import GoodsList from "components/content/goods/GoodsList";
 import Scroll from "components/common/scroll/Scroll";
 import { getHomeMultidata, getHomeData } from "../../network/home";
-
-
 
 export default {
   name: "Home",
@@ -62,9 +60,7 @@ export default {
     this.getHomeData("news");
     this.getHomeData("sell");
   },
-  mounted(){
-    
-  },
+  mounted() {},
   methods: {
     TabClick(index) {
       switch (index) {
@@ -78,6 +74,7 @@ export default {
           this.IndexClass = "sell";
           break;
       }
+   
     },
     /**
       网络请求相关代码
@@ -100,7 +97,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .nav-bar {
   position: fixed;
   left: 0;
@@ -111,7 +108,7 @@ export default {
   position: sticky;
   top: 44px;
 }
-.content{
+.homeContent {
   height: 850px;
   overflow: hidden;
 }

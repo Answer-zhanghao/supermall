@@ -30,6 +30,8 @@ export default {
       this.isActivite = index;
       this.$emit('TabClick',index)
 
+      
+
     }
   }
 };
