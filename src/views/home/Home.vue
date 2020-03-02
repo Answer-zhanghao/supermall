@@ -3,7 +3,7 @@
     <navbar>
         <div slot="center">购物街</div>
       </navbar>
-    <Scroll class="homeContent" ref='scroll'>
+    <Scroll class="homeContent" ref='scroll' :probeType='3' @scrollDown='scrollDown' :pull-up-load='true' @pullUpLoads='pullUpLoad'>
       
       <home-swiper :banners="banners"></home-swiper>
       <home-rounding :recommends="recommends"></home-rounding>
@@ -11,7 +11,7 @@
       <tab-control :tabitem="['流行','新款','精选']" @TabClick="TabClick"></tab-control>
       <goods-list :goods="goodslist"></goods-list>
     </Scroll>
-    <back-top @click.native='clickFast' />
+    <back-top @click.native='clickFast' v-show="isShow"/>
   </div>
 </template>
 
@@ -44,11 +44,12 @@ export default {
       recommends: [],
       goods: {
         pop: { page: 0, list: [] },
-        news: { page: 0, list: [] },
+        new: { page: 0, list: [] },
         sell: { page: 0, list: [] }
       },
       scroll: null,
-      IndexClass: "pop"
+      IndexClass: "pop",
+      isShow:false
     };
   },
   computed: {
@@ -61,7 +62,7 @@ export default {
     this.getHomeMultidata();
     //  请求商品数据
     this.getHomeData("pop");
-    this.getHomeData("news");
+    this.getHomeData("new");
     this.getHomeData("sell");
   },
   mounted() {},
@@ -72,7 +73,7 @@ export default {
           this.IndexClass = "pop";
           break;
         case 1:
-          this.IndexClass = "news";
+          this.IndexClass = "new";
           break;
         case 2:
           this.IndexClass = "sell";
@@ -80,8 +81,14 @@ export default {
       }
    
     },
+    scrollDown(position){
+        this.isShow=-position.y>1000
+    },
     clickFast(){
       this.$refs.scroll.scrollTo(0,0)
+    },
+    pullUpLoad(){
+      this.getHomeData(this.IndexClass)
     },
     /**
       网络请求相关代码
@@ -98,7 +105,10 @@ export default {
         console.log(res);
         this.goods[type].list.push(...res.data.list);
         this.goods[type].page += 1;
+        // 完成上拉加载更多
+          this.$refs.scroll.finishPullUp()
       });
+
     }
   }
 };
